@@ -90,7 +90,12 @@ public class AppFrame extends JFrame {
     JMenu jMenuFormat = new JMenu();
     JMenu jMenuInsert = new JMenu();
     
-  
+    // Added -- view Menu + items (New) ---
+    JMenu jMenuView = new JMenu();
+    JMenuItem jMenuViewToggleDark = new JMenuItem();
+    private boolean darkModeEnabled = false;
+    //--------------------------------------
+    //----------------------------------------
     
     public WorkPanel workPanel = new WorkPanel();
     HTMLEditor editor = workPanel.dailyItemsPanel.editorPanel.editor;
@@ -349,8 +354,11 @@ public class AppFrame extends JFrame {
 
         jMenuEdit.setText(Local.getString("Edit"));
         
-     
-        
+        //---------------------------------------
+        // --- View menu setup (NEW) ---
+        jMenuView.setText("View");
+        //
+        //
         
         jMenuEditUndo.setText(Local.getString("Undo"));
         jMenuEditUndo.setToolTipText(Local.getString("Undo"));
@@ -481,6 +489,7 @@ public class AppFrame extends JFrame {
         menuBar.add(jMenuEdit);
         menuBar.add(jMenuInsert);
         menuBar.add(jMenuFormat);
+        menuBar.add(jMenuView);
         menuBar.add(jMenuGo);
         menuBar.add(jMenuHelp);
         this.setJMenuBar(menuBar);
