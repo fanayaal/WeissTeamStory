@@ -5,7 +5,7 @@ plugins {
 apply plugin: 'application'
 
 
-mainClassName = 'memoranda/Start'
+mainClassName = 'memoranda.Start'
 
 compileJava.options.encoding = 'UTF-8'
 
@@ -69,3 +69,25 @@ dependencies {
 //     showProgress = true
 //     effort = 'max'
 // }
+// --- Fat JAR task (creates build/asurite_memoranda.jar) ---
+import org.gradle.jvm.tasks.Jar
+
+tasks.register('fatJar', Jar) {
+    archiveFileName.set('asurite_memoranda.jar')
+    destinationDirectory.set(layout.buildDirectory)
+
+    from sourceSets.main.output
+
+    // Gradle 8: treat runtimeClasspath as a Configuration directly (no .get())
+    dependsOn configurations.runtimeClasspath
+    from {
+        configurations.runtimeClasspath.collect { it.isDirectory() ? it : zipTree(it) }
+    }
+
+    duplicatesStrategy = DuplicatesStrategy.INCLUDE
+
+    manifest {
+        attributes('Main-Class': 'memoranda.Start')
+    }
+}
+
