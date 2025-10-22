@@ -357,6 +357,27 @@ public class AppFrame extends JFrame {
         //---------------------------------------
         // --- View menu setup (NEW) ---
         jMenuView.setText("View");
+        jMenuViewToggleDark.setText("Toggle Dark Mode");
+        jMenuView.add(jMenuViewToggleDark);
+        // Listeners
+        jMenuViewToggleDark.addActionListener(e -> {
+            try {
+                if (!darkModeEnabled) {
+                    UIManager.setLookAndFeel("javax.swing.plaf.nimbus.NimbusLookAndFeel");
+                    darkModeEnabled = true;
+                } else {
+                    // Cross-platform "light" look and feel
+                    UIManager.setLookAndFeel(UIManager.getCrossPlatformLookAndFeelClassName());
+                    darkModeEnabled = false;
+                }
+                // Refresh all open windows so the LAF takes effect
+                for (Window w : Window.getWindows()) {
+                    SwingUtilities.updateComponentTreeUI(w);
+                }
+            } catch (Exception ex) {
+                ex.printStackTrace();
+            }
+        });
         //
         //
         
