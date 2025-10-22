@@ -56,6 +56,10 @@ import nu.xom.Document;
 import nu.xom.Element;
 import nu.xom.Elements;
 
+// Added import 
+import java.awt.Window;
+import javax.swing.SwingUtilities;
+
 
 /**
  * 
@@ -85,7 +89,9 @@ public class AppFrame extends JFrame {
     JMenu jMenuEdit = new JMenu();
     JMenu jMenuFormat = new JMenu();
     JMenu jMenuInsert = new JMenu();
-
+    
+  
+    
     public WorkPanel workPanel = new WorkPanel();
     HTMLEditor editor = workPanel.dailyItemsPanel.editorPanel.editor;
 
@@ -262,7 +268,7 @@ public class AppFrame extends JFrame {
         contentPane = (JPanel) this.getContentPane();
         contentPane.setLayout(borderLayout1);
         //this.setSize(new Dimension(800, 500));
-        this.setTitle("Memoranda - " + CurrentProject.get().getTitle());
+        this.setTitle("Memoranda - fanayaal - " + CurrentProject.get().getTitle());
         //Added a space to App.VERSION_INFO to make it look some nicer
         statusBar.setText(" Version:" + App.VERSION_INFO + " (Build "
                 + App.BUILD_INFO + " )");
@@ -342,7 +348,10 @@ public class AppFrame extends JFrame {
                 InputEvent.ALT_MASK));
 
         jMenuEdit.setText(Local.getString("Edit"));
-
+        
+     
+        
+        
         jMenuEditUndo.setText(Local.getString("Undo"));
         jMenuEditUndo.setToolTipText(Local.getString("Undo"));
         jMenuEditRedo.setText(Local.getString("Redo"));
